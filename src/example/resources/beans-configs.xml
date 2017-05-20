@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置事务管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- 配置 sqlSessionFactory -->
+    <!--<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+        <!--<property name="dataSource" ref="dataSource" />-->
+        <!--&lt;!&ndash;<property name="typeAliasesPackage" value="com.mybatis3.domain"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="typeHandlersPackage" value="com.mybatis3.typehandlers"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;<property name="mapperLocations" value="classpath*:com/mybatis3/**/*.xml" />&ndash;&gt;-->
+    <!--</bean>-->
+
+    <!-- 配置 sqlSessionTemplate-->
+    <!--<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">-->
+        <!--<constructor-arg index="0" ref="sqlSessionFactory" />-->
+    <!--</bean>-->
+
+    <!-- 配置 bus 数据源 -->
+    <bean id = "eventBusDBManager" class="EventBusDBConfig.EventBusDBManager">
+        <property name="dataSource" ref="dataSource"></property>
+        <property name="transactionManager" ref="transactionManager"></property>
+    </bean>
+
+</beans>

@@ -7,8 +7,6 @@ public class EventBusBody {
 
     private String topic;
 
-    private String consumerBean;
-
     private String context;
 
     private int consumerNums;
@@ -19,14 +17,6 @@ public class EventBusBody {
 
     public void setTopic(String topic) {
         this.topic = topic;
-    }
-
-    public String getConsumerBean() {
-        return consumerBean;
-    }
-
-    public void setConsumerBean(String consumerBean) {
-        this.consumerBean = consumerBean;
     }
 
     public String getContext() {
