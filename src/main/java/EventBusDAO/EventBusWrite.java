@@ -1,12 +1,11 @@
 package EventBusDAO;
 
-import Domain.Event;
+import EventBusModel.Event;
 
 /**
  * Created by alan on 17-5-6.
  */
 public interface EventBusWrite {
 
-    // test
     public int writeTopic(Event event);
 }

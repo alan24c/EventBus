@@ -1,7 +1,14 @@
 package eventBusSchedule;
 
+
 import EventBusDAO.EventBusRead;
+import EventBusMTO.EventReadMTO;
+import EventBusModel.Event;
+import EventBusService.*;
 import Metadata.EventBusMetadata;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * Created by alan on 17-5-6.
@@ -12,16 +19,22 @@ import Metadata.EventBusMetadata;
  */
 public class EventBusSchedule {
 
-    private EventBusMetadata eventBusMetadata;
+    @Autowired
+    EventBusService eventBusService;
 
-    private EventBusRead eventBusRead;
+    @Autowired
+    EventBusConsumerService eventBusConsumerService;
 
     public void eventSchedule(){
 
         // db 里面捞取数据
-
+        String topic = "test";
+        int nums = 100;
+        List<Event> eventList = eventBusConsumerService.getEvents(topic,nums);
 
         // 派发 event 任务
+        eventBusConsumerService.dispatchEvent(eventList);
 
+        // TODO: 17-5-29 通知调度线程成功
     }
 }

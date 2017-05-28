@@ -15,19 +15,4 @@ import static org.junit.Assert.assertNotNull;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:applicationContext.xml")
 public class topicWriteTest {
-
-    @Autowired
-    private EventBusService eventBusService;
-
-
-    @Test
-    public void testFindAllStudents() {
-        Event event = new Event();
-        event.setTopic("test");
-        event.setProcessor("testProcessor");
-        event.setContext("hello,test");
-
-        eventBusService.writeTopic(event);
-
-    }
 }

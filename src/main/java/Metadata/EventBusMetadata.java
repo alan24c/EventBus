@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationContextAware;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.*;
 
 /**
@@ -74,6 +75,15 @@ public abstract class EventBusMetadata implements ApplicationContextAware{
 
     }
 
+    public Set<EventTopic> getAllTopics(){
+        return relationShip.keySet();
+    }
+
+    public List<EventSubscribe> getAllSubscribes(String topic){
+        EventTopic eventTopic  = new EventTopic(topic);
+
+        return relationShip.get(eventTopic);
+    }
 
     // 事件的分发,将待分发的任务放入到当前的调度队列中
 //    public boolean dispatch(EventBusBody eventBusBody){

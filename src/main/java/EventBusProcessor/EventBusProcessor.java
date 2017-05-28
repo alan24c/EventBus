@@ -1,4 +1,6 @@
-package eventBusProcessor;
+package EventBusProcessor;
+
+import java.io.Serializable;
 
 /**
  * Created by alan on 17-5-6.
@@ -10,5 +12,5 @@ package eventBusProcessor;
 public interface EventBusProcessor {
 
     // 子类实现该方法实现任务的处理
-    public EventBusResult process(EventBusContext context);
+    public EventBusProcessResult process(Serializable context);
 }

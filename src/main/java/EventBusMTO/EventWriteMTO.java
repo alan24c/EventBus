@@ -1,5 +1,8 @@
 package EventBusMTO;
 
+import EventBusModel.Event;
+import utils.FastJsonUtils;
+
 import java.io.Serializable;
 
 /**
@@ -35,5 +38,16 @@ public class EventWriteMTO {
         if(context == null){
 
         }
+    }
+
+    public Event toEvent(){
+        Event event = new Event();
+
+        event.setTopic(topic);
+        event.setContext(FastJsonUtils.objectToString(event.getContext()));
+        event.setSuccess(false);
+        event.setConsumerNums(0);
+
+        return event;
     }
 }

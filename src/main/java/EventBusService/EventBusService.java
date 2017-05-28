@@ -1,10 +1,15 @@
 package EventBusService;
 
-import Domain.Event;
+
+import EventBusDAO.EventBusRead;
 import EventBusDAO.EventBusWrite;
+import EventBusMTO.EventReadMTO;
 import EventBusMTO.EventWriteMTO;
+import EventBusModel.Event;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by alan on 17-5-20.
@@ -15,10 +20,20 @@ public class EventBusService {
     @Autowired
     EventBusWrite eventBusWrite;
 
-    public int writeEvent(EventWriteMTO event){
-//        return eventBusWrite.writeTopic(event);
-        return 0;
+    @Autowired
+    EventBusRead eventBusRead;
+
+    public int writeEvent(EventWriteMTO eventWriteMTO){
+
+        Event event = eventWriteMTO.toEvent();
+
+        return eventBusWrite.writeTopic(event);
+
     }
 
+    public List<Event> getEvent(EventReadMTO query){
+
+        return null;
+    }
 
 }
