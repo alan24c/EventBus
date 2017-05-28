@@ -36,5 +36,5 @@
     <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
 
-    <bean id = "eventBusWriteService" class="EventBusService.EventBusWriteService"/>
+    <bean id = "eventBusWriteService" class="EventBusService.EventBusService"/>
 </beans>

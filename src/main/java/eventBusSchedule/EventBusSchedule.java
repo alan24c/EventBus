@@ -1,7 +1,7 @@
 package eventBusSchedule;
 
 import EventBusDAO.EventBusRead;
-import metadata.EventBusMetadata;
+import Metadata.EventBusMetadata;
 
 /**
  * Created by alan on 17-5-6.

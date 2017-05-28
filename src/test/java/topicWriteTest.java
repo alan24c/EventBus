@@ -1,13 +1,10 @@
 import Domain.Event;
-import EventBusDAO.EventBusWrite;
-import EventBusService.EventBusWriteService;
+import EventBusService.EventBusService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import java.util.List;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -20,7 +17,7 @@ import static org.junit.Assert.assertNotNull;
 public class topicWriteTest {
 
     @Autowired
-    private EventBusWriteService eventBusWriteService;
+    private EventBusService eventBusService;
 
 
     @Test
@@ -30,7 +27,7 @@ public class topicWriteTest {
         event.setProcessor("testProcessor");
         event.setContext("hello,test");
 
-        eventBusWriteService.writeTopic(event);
+        eventBusService.writeTopic(event);
 
     }
 }

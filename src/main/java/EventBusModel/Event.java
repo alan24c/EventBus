@@ -1,14 +1,21 @@
-package eventBusDataModel;
+package EventBusModel;
 
 /**
- * Created by alan on 17-5-6.
+ * Created by alan on 17-5-28.
  */
-public class EventBusBody {
+// db 中的数据模型
+public class Event {
 
+    // 事件主题
     private String topic;
 
+    // 消费上下文
     private String context;
 
+    // 消费是否成功
+    private boolean isSuccess;
+
+    // 消费次数
     private int consumerNums;
 
     public String getTopic() {
@@ -25,6 +32,14 @@ public class EventBusBody {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public boolean isSuccess() {
+        return isSuccess;
+    }
+
+    public void setSuccess(boolean success) {
+        isSuccess = success;
     }
 
     public int getConsumerNums() {
