@@ -7,6 +7,7 @@ import EventBusMTO.EventReadMTO;
 import EventBusMTO.EventWriteMTO;
 import EventBusModel.Event;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,14 +15,14 @@ import java.util.List;
 /**
  * Created by alan on 17-5-20.
  */
-@Service
+@Component
 public class EventBusService {
 
     @Autowired
-    EventBusWrite eventBusWrite;
+    private EventBusWrite eventBusWrite;
 
     @Autowired
-    EventBusRead eventBusRead;
+    private EventBusRead eventBusRead;
 
     public int writeEvent(EventWriteMTO eventWriteMTO){
 

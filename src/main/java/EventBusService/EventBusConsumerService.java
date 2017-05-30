@@ -8,6 +8,7 @@ import EventBusProcessor.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.concurrent.*;
@@ -15,6 +16,7 @@ import java.util.concurrent.*;
 /**
  * Created by alan on 17-5-28.
  */
+@Component
 public class EventBusConsumerService implements ApplicationContextAware{
 
     private static int nums = 10;
