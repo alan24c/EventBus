@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EventBusDAO.EventBusRead">
+
+    <resultMap type="Event" id="event">
+        <result property="topic" column="topic"/>
+        <result property="context" column="context"/>
+        <result property="isSuccess" column="isSuccess"/>
+        <result property="consumerNums" column="consumerNums"/>
+    </resultMap>
+
+
+    <select id = "getEvent" parameterType="EventReadMTO" resultType="event">
+
+        SELECT * FROM EVENT
+        WHERE TOPIC = #{topicName}
+
+    </select>
+
+</mapper>

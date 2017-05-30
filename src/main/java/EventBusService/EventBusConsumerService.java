@@ -70,7 +70,6 @@ public class EventBusConsumerService implements ApplicationContextAware{
             this.event = event;
         }
 
-        @Override
         public void run(){
             String topic = event.getTopic();
             String context = event.getContext();

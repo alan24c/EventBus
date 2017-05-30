@@ -33,7 +33,7 @@ public class EventBusService {
 
     public List<Event> getEvent(EventReadMTO query){
 
-        return null;
+        return eventBusRead.getEvent(query);
     }
 
 }
