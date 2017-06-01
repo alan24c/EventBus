@@ -5,8 +5,8 @@
 
 <mapper namespace="EventBusDAO.EventBusWrite">
 
-    <insert id="writeTopic" parameterType="Event" useGeneratedKeys="true" keyProperty="id">
-      insert into EVENT(topic,processor,context)
-  	  values(#{topic},#{processor},#{context})
+    <insert id="writeTopic" parameterType="Event" useGeneratedKeys="true" keyProperty="ID">
+      insert into EVENT(topic,context,isSuccess,consumerNums)
+  	  values(#{topic},#{context},#{isSuccess},#{consumerNums})
     </insert>
 </mapper>

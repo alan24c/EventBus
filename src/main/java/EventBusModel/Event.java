@@ -6,6 +6,9 @@ package EventBusModel;
 // db 中的数据模型
 public class Event {
 
+    // 数据库中的主键(命名需要与db中的名字一模一样)
+    private int ID;
+
     // 事件主题
     private String topic;
 
@@ -17,6 +20,14 @@ public class Event {
 
     // 消费次数
     private int consumerNums;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int id) {
+        this.ID = id;
+    }
 
     public String getTopic() {
         return topic;

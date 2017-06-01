@@ -23,6 +23,7 @@ public class EventBusConsumerService implements ApplicationContextAware{
 
     private volatile boolean isDispatching = true;
 
+    @Autowired
     private ApplicationContext applicationContext;
 
     private ExecutorService comsumerService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()+1);

@@ -4,6 +4,7 @@ import EventBusModel.EventSubscribe;
 import EventBusModel.EventTopic;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -23,7 +24,9 @@ import java.util.concurrent.*;
 
 
  */
-public abstract class EventBusMetadata implements ApplicationContextAware{
+// TODO: 17-6-2 为了跑通测试用例删除 abstract
+@Component
+public class EventBusMetadata implements ApplicationContextAware{
     // 整个 app 中 topic 的订阅关系
     //private ConcurrentHashMap<EventTopic,EventSubscribe> datas = new ConcurrentHashMap<EventTopic, EventSubscribe>();
 
@@ -43,7 +46,7 @@ public abstract class EventBusMetadata implements ApplicationContextAware{
 
     private volatile boolean running = true;
 
-    public abstract LinkedList<EventSubscribe> getTopicAndSubscribes();
+    //public abstract LinkedList<EventSubscribe> getTopicAndSubscribes();
 
     private ApplicationContext applicationContext;
 
