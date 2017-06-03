@@ -56,7 +56,7 @@ public class EventBusConsumerService implements ApplicationContextAware{
         this.dispatch.addAll(events);
     }
 
-    private void comsumerEvent(){
+    public void comsumerEvent(){
 
         while (isDispatching){
             Event event = dispatch.poll();

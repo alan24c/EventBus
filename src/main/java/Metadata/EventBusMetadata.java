@@ -25,8 +25,7 @@ import java.util.concurrent.*;
 
  */
 // TODO: 17-6-2 为了跑通测试用例删除 abstract
-@Component
-public class EventBusMetadata implements ApplicationContextAware{
+public abstract class EventBusMetadata implements ApplicationContextAware{
     // 整个 app 中 topic 的订阅关系
     //private ConcurrentHashMap<EventTopic,EventSubscribe> datas = new ConcurrentHashMap<EventTopic, EventSubscribe>();
 
@@ -36,7 +35,7 @@ public class EventBusMetadata implements ApplicationContextAware{
     //private BlockingQueue<EventBusBody> dispatchQueue;
 
     // 订阅关系定义
-    private Map<EventTopic,List<EventSubscribe>> relationShip = new ConcurrentHashMap<EventTopic, List<EventSubscribe>>() ;
+    private Map<String,List<EventSubscribe>> relationShip = new ConcurrentHashMap<String, List<EventSubscribe>>() ;
 
     private static int THREAD_POOL_NUMS = Runtime.getRuntime().availableProcessors()+1;
 
@@ -46,7 +45,7 @@ public class EventBusMetadata implements ApplicationContextAware{
 
     private volatile boolean running = true;
 
-    //public abstract LinkedList<EventSubscribe> getTopicAndSubscribes();
+    public abstract LinkedList<EventSubscribe> getTopicAndSubscribes();
 
     private ApplicationContext applicationContext;
 
@@ -54,18 +53,20 @@ public class EventBusMetadata implements ApplicationContextAware{
         this.applicationContext = applicationContext;
     }
 
+    // 添加 topic
+//    public abstract Set<EventTopic> registTopic();
+
     // 添加订阅关系
     public void putMetadata(String topicName, String comsunerbean){
 
-        EventTopic topic = new EventTopic(topicName);
         EventSubscribe subscribe = new EventSubscribe(comsunerbean);
 
         // 新添加的 topic
-        if( relationShip.get(topic) == null){
+        if( relationShip.get(topicName) == null){
             List<EventSubscribe> subscribes = new LinkedList<EventSubscribe>();
             subscribes.add(subscribe);
 
-            List<EventSubscribe> oldValues = relationShip.putIfAbsent(topic,subscribes);
+            List<EventSubscribe> oldValues = relationShip.putIfAbsent(topicName,subscribes);
             // 并发条件下被另外一个线程写入
             if(oldValues != null){
                 // TODO: 17-5-28  写入 subscribes 注意线程安全
@@ -73,19 +74,18 @@ public class EventBusMetadata implements ApplicationContextAware{
             }
         }else {
             // TODO: 17-5-28 写入 subscribes 注意线程安全
-            relationShip.get(topic).add(subscribe);
+            relationShip.get(topicName).add(subscribe);
         }
 
     }
 
-    public Set<EventTopic> getAllTopics(){
+    public Set<String> getAllTopics(){
         return relationShip.keySet();
     }
 
     public List<EventSubscribe> getAllSubscribes(String topic){
-        EventTopic eventTopic  = new EventTopic(topic);
 
-        return relationShip.get(eventTopic);
+        return relationShip.get(topic);
     }
 
     // 事件的分发,将待分发的任务放入到当前的调度队列中
