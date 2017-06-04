@@ -8,6 +8,8 @@ public class ProcessorTest implements EventBusProcessor<ProcessorTestContext> {
     public EventBusProcessResult process(ProcessorTestContext context){
         EventBusProcessResult result = new EventBusProcessResult();
 
+
+        result.setSuccess(true);
         return result;
     }
 }

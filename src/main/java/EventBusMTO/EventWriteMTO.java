@@ -44,7 +44,7 @@ public class EventWriteMTO {
         Event event = new Event();
 
         event.setTopic(topic);
-        event.setContext(FastJsonUtils.objectToString(event.getContext()));
+        event.setContext(FastJsonUtils.objectToString(context));
         event.setSuccess(false);
         event.setConsumerNums(0);
 

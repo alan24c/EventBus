@@ -57,7 +57,8 @@ public class TestTopicPublish {
         eventBusMetadata.putMetadata(testTopicA,testConsumerBeanA);
 
         // 写入事件
-        ProcessorTestContext context = new ProcessorTestContext();
+        ProcessorTestContext context = new ProcessorTestContext(1);
+        //context.setNums(1);
         eventBusManager.publish(testTopicA,context);
 
         // 模拟消费

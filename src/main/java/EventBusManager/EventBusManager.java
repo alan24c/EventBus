@@ -4,6 +4,7 @@ import EventBusMTO.EventWriteMTO;
 import EventBusService.EventBusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import utils.FastJsonUtils;
 
 import java.io.Serializable;
 

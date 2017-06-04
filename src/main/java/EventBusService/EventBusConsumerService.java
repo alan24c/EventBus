@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import utils.FastJsonUtils;
 
 import java.util.List;
 import java.util.concurrent.*;
@@ -26,7 +27,7 @@ public class EventBusConsumerService implements ApplicationContextAware{
     @Autowired
     private ApplicationContext applicationContext;
 
-    private ExecutorService comsumerService = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors()+1);
+    private ExecutorService comsumerService = Executors.newFixedThreadPool(1);
 
     @Autowired
     EventBusService eventBusService;
@@ -84,8 +85,9 @@ public class EventBusConsumerService implements ApplicationContextAware{
                 String consumerBean = subscribe.getConsumerBeanName();
 
                 EventBusProcessor bean = (EventBusProcessor)applicationContext.getBean(consumerBean);
+                Object obj = FastJsonUtils.stringToObject(context);
 
-                EventBusProcessResult res = bean.process(context);
+                EventBusProcessResult res = bean.process(obj);
 
             }
         }
