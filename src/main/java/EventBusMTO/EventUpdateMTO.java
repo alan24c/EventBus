@@ -1,12 +1,9 @@
-package EventBusModel;
-
-import EventBusMTO.EventUpdateMTO;
+package EventBusMTO;
 
 /**
- * Created by alan on 17-5-28.
+ * Created by alan on 17-6-17.
  */
-// db 中的数据模型
-public class Event {
+public class EventUpdateMTO {
 
     // 数据库中的主键(命名需要与db中的名字一模一样)
     private int ID;
@@ -76,4 +73,5 @@ public class Event {
     public void setConsumerMask(int consumerMask) {
         this.consumerMask = consumerMask;
     }
+
 }

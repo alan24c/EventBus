@@ -1,6 +1,7 @@
 package EventBusService;
 
 import EventBusMTO.EventReadMTO;
+import EventBusMTO.EventUpdateMTO;
 import EventBusModel.Event;
 import EventBusModel.EventSubscribe;
 import Metadata.EventBusMetadata;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
+import utils.BeanCopyUtils;
 import utils.FastJsonUtils;
 
 import java.util.ArrayList;
@@ -105,7 +107,7 @@ public class EventBusConsumerService implements ApplicationContextAware{
             }
 
             // DB 入库
-            
+            eventBusService.updateEvent((EventUpdateMTO) BeanCopyUtils.beanCopy(event, EventUpdateMTO.class));
 
         }
 

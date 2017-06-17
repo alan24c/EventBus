@@ -14,4 +14,6 @@ public class EventBusMetadataTest extends EventBusMetadata {
     public LinkedList<EventSubscribe> getTopicAndSubscribes(){
         return null;
     }
+
+
 }

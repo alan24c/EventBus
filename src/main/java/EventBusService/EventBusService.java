@@ -4,6 +4,7 @@ package EventBusService;
 import EventBusDAO.EventBusRead;
 import EventBusDAO.EventBusWrite;
 import EventBusMTO.EventReadMTO;
+import EventBusMTO.EventUpdateMTO;
 import EventBusMTO.EventWriteMTO;
 import EventBusModel.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,11 @@ public class EventBusService {
     public List<Event> getEvent(EventReadMTO query){
 
         return eventBusRead.getEvent(query);
+    }
+
+    public int updateEvent(EventUpdateMTO eventWriteMTO){
+
+        return 1;
     }
 
 }

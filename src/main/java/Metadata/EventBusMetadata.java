@@ -6,10 +6,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.*;
 
 /**
@@ -36,6 +33,9 @@ public abstract class EventBusMetadata implements ApplicationContextAware{
     // 订阅关系定义
     private Map<String,List<EventSubscribe>> relationShip = new ConcurrentHashMap<String, List<EventSubscribe>>() ;
 
+    // 主题的定义
+    private Set<EventTopic> topics = new HashSet<>();
+
     private static int THREAD_POOL_NUMS = Runtime.getRuntime().availableProcessors()+1;
 
     // 消费 event 的线程池
@@ -53,12 +53,17 @@ public abstract class EventBusMetadata implements ApplicationContextAware{
     }
 
     // 添加 topic
-//    public abstract Set<EventTopic> registTopic();
+    public void registTopic(String topicName,Integer processorNums){
+        EventTopic topic = new EventTopic(topicName,processorNums);
+        topics.add(topic);
+    }
 
     // 添加订阅关系
-    public void putMetadata(String topicName, String comsunerbean){
+    public void putMetadata(String topicName, String comsunerbean,int comsumerIndex){
 
-        EventSubscribe subscribe = new EventSubscribe(comsunerbean);
+
+
+        EventSubscribe subscribe = new EventSubscribe(comsunerbean,comsumerIndex);
 
         // 新添加的 topic
         if( relationShip.get(topicName) == null){

@@ -54,7 +54,7 @@ public class TestTopicPublish {
         // 构造关系
         String testTopicA = "testTopicA" ;
         String testConsumerBeanA = "processorTest";
-        eventBusMetadata.putMetadata(testTopicA,testConsumerBeanA);
+        eventBusMetadata.putMetadata(testTopicA,testConsumerBeanA,1);
 
         // 写入事件
         ProcessorTestContext context = new ProcessorTestContext();
@@ -79,7 +79,7 @@ public class TestTopicPublish {
 
 
         // 一个 topic 对应 一个 subScribe
-        eventBusMetadata.putMetadata(testTopicA,testConsumerBeanA);
+        eventBusMetadata.putMetadata(testTopicA,testConsumerBeanA,1);
 
         Set<String> topics = eventBusMetadata.getAllTopics();
         Assert.assertEquals( topics.size(),1);
@@ -89,7 +89,7 @@ public class TestTopicPublish {
         }
 
         // 一个 topic 对应 多个 subScribe
-        eventBusMetadata.putMetadata(testTopicA,testConsumerBeanB);
+        eventBusMetadata.putMetadata(testTopicA,testConsumerBeanB,1);
         Set<String> topics_1 = eventBusMetadata.getAllTopics();
         Assert.assertEquals( topics_1.size(),1);
 
@@ -100,7 +100,7 @@ public class TestTopicPublish {
 
         // 一个 topic 对应 多个 subScirbe
         // 一个 topic 对应 一个 subScribe
-        eventBusMetadata.putMetadata(testTopicB,testConsumerBeanB);
+        eventBusMetadata.putMetadata(testTopicB,testConsumerBeanB,1);
         Set<String> topics_2 = eventBusMetadata.getAllTopics();
         Assert.assertEquals( topics_2.size(),2);
 

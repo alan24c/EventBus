@@ -8,4 +8,6 @@ import EventBusModel.Event;
 public interface EventBusWrite {
 
     public int writeTopic(Event event);
+
+    public int updateEvent(Event event);
 }

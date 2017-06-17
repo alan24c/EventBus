@@ -3,24 +3,19 @@ package EventBusModel;
 /**
  * Created by alan on 17-5-28.
  */
+/*
+    订阅者的核心是 consumerBean,
+    其所属的 topic 应该是在 relationShip中呈现,而不是固化在该 bean 中
+ */
 public class EventSubscribe {
-
-    private String topic;
 
     private String consumerBeanName;
 
-    private Integer index;
+    private int index;
 
-    public EventSubscribe(String consumerBeanName){
+    public EventSubscribe(String consumerBeanName,int index){
         this.consumerBeanName = consumerBeanName;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
+        this.index = index;
     }
 
     public String getConsumerBeanName() {
