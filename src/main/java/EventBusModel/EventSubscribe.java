@@ -9,6 +9,8 @@ public class EventSubscribe {
 
     private String consumerBeanName;
 
+    private Integer index;
+
     public EventSubscribe(String consumerBeanName){
         this.consumerBeanName = consumerBeanName;
     }
@@ -27,5 +29,13 @@ public class EventSubscribe {
 
     public void setConsumerBeanName(String consumerBeanName) {
         this.consumerBeanName = consumerBeanName;
+    }
+
+    public Integer getIndex() {
+        return index;
+    }
+
+    public void setIndex(Integer index) {
+        this.index = index;
     }
 }

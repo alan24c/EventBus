@@ -11,6 +11,7 @@ import java.io.Serializable;
  */
 public class FastJsonUtils {
 
+    // FastJson 默认将自动类型转换给关闭了
     static {
         ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
     }

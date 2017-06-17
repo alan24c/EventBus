@@ -7,6 +7,8 @@ public class EventTopic {
 
     private String topicName;
 
+    private Integer maskNums;
+
     public EventTopic(String topicName){
         this.topicName = topicName;
     }
@@ -17,5 +19,13 @@ public class EventTopic {
 
     public void setTopicName(String topicName) {
         this.topicName = topicName;
+    }
+
+    public Integer getMaskNums() {
+        return maskNums;
+    }
+
+    public void setMaskNums(Integer maskNums) {
+        this.maskNums = maskNums;
     }
 }

@@ -24,7 +24,6 @@ import java.util.concurrent.*;
 
 
  */
-// TODO: 17-6-2 为了跑通测试用例删除 abstract
 public abstract class EventBusMetadata implements ApplicationContextAware{
     // 整个 app 中 topic 的订阅关系
     //private ConcurrentHashMap<EventTopic,EventSubscribe> datas = new ConcurrentHashMap<EventTopic, EventSubscribe>();
@@ -88,50 +87,4 @@ public abstract class EventBusMetadata implements ApplicationContextAware{
         return relationShip.get(topic);
     }
 
-    // 事件的分发,将待分发的任务放入到当前的调度队列中
-//    public boolean dispatch(EventBusBody eventBusBody){
-//
-//        try {
-//            dispatchQueue.put(eventBusBody);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//            return false;
-//        }
-//
-//        return true;
-//    }
-
-    // 消费调度队列中的任务
-//    private void eventConsumer(){
-//
-//        Runnable task = new Runnable() {
-//            public void run() {
-//              while (running){
-//                  EventBusBody eventBody = null;
-//                  try {
-//                      eventBody = dispatchQueue.take();
-//
-//                      // 获取 topic
-//                      String topic = eventBody.getTopic();
-//
-//                      // 根据 topic 获取消费的 processor
-//
-//
-//                      // TODO: 17-5-14 反序列化
-//                      String context = eventBody.getContext();
-//
-//                      // 消费 event
-//
-//
-//                  } catch (InterruptedException e) {
-//                      e.printStackTrace();
-//                  }
-//              }
-//            }
-//        };
-//
-//        for (int i = 0; i < THREAD_POOL_NUMS; i++) {
-//            threadPool.submit(task);
-//        }
-//    }
 }

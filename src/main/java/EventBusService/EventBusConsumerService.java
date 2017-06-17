@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import utils.FastJsonUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -76,12 +77,20 @@ public class EventBusConsumerService implements ApplicationContextAware{
 
         public void run(){
             String topic = event.getTopic();
+            Integer topicNums = 0; // TODO
             String context = event.getContext();
+            int consumerMask = event.getConsumerMask();
+
+            // 获取需要执行的 processor 的位置信息
+            List<Integer> locations = calculateLocation(topicNums,consumerMask);
+
 
             List<EventSubscribe> subscribes = metadata.getAllSubscribes(topic);
             if(subscribes == null) return;
 
-            for(EventSubscribe subscribe : subscribes){
+
+            for(Integer index: locations){
+                EventSubscribe subscribe = subscribes.get(index);
                 String consumerBean = subscribe.getConsumerBeanName();
 
                 EventBusProcessor bean = (EventBusProcessor)applicationContext.getBean(consumerBean);
@@ -89,10 +98,53 @@ public class EventBusConsumerService implements ApplicationContextAware{
 
                 EventBusProcessResult res = bean.process(obj);
 
+                if(res.isSuccess()){
+                    event.setConsumerMask(maskProcessSuccess(consumerMask,index));
+                }
+
             }
+
+            // DB 入库
+            
+
         }
 
     }
 
+    /*
+       nums: 0000 1111
+       mask: 0000 0101
+       return ： 1,3
+    */
+    private List<Integer> calculateLocation(int nums, int mask){
+        List<Integer> res = new ArrayList<>();
 
+        int temp = nums & mask;
+        for(int i = 1; i< Integer.MAX_VALUE;i++){
+            int result = temp & 0x00000001;
+
+             if(result != 0x00000000){
+                 res.add(i);
+             }else{
+                 break;
+             }
+
+             temp = temp>>1;
+        }
+
+        return res;
+    }
+
+
+    /*
+       mask: 0000 0101
+       index: 3
+       return ： 0000 0001
+    */
+    private int maskProcessSuccess(int mask,int index){
+
+        int temp = 0x00000001;
+        temp = temp << (index-1);
+        return temp^mask;
+    }
 }

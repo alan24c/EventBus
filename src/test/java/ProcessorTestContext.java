@@ -15,11 +15,11 @@ public class ProcessorTestContext implements Serializable {
     }
 
 
-    public ProcessorTestContext(){
-
-    }
-
-    public ProcessorTestContext(int nums) {
-        this.nums = nums;
-    }
+//    public ProcessorTestContext(){
+//
+//    }
+//
+//    public ProcessorTestContext(int nums) {
+//        this.nums = nums;
+//    }
 }

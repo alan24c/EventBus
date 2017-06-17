@@ -21,6 +21,12 @@ public class Event {
     // 消费次数
     private int consumerNums;
 
+    /* 事件的处理掩码
+       每一个 bit 位表示对应的 processor 处理是否成功
+       0 表示处理成功,1表示处理失败
+    */
+    private int consumerMask;
+
     public int getID() {
         return ID;
     }
@@ -59,5 +65,13 @@ public class Event {
 
     public void setConsumerNums(int consumerNums) {
         this.consumerNums = consumerNums;
+    }
+
+    public int getConsumerMask() {
+        return consumerMask;
+    }
+
+    public void setConsumerMask(int consumerMask) {
+        this.consumerMask = consumerMask;
     }
 }
