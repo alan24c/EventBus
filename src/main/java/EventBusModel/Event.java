@@ -5,22 +5,23 @@ import EventBusMTO.EventUpdateMTO;
 /**
  * Created by alan on 17-5-28.
  */
-// db 中的数据模型
+// 内存中Event的数据模型
 public class Event {
 
-    // 数据库中的主键(命名需要与db中的名字一模一样)
-    private int ID;
+    // db主键ID
+    // TODO: 17-7-8 以后改为 sequence 自动生成,不污染内存 model
+    private int id;
 
     // 事件主题
     private String topic;
 
-    // 消费上下文
+    // 消费上下文(事件携带的参数)
     private String context;
 
     // 消费是否成功
     private boolean isSuccess;
 
-    // 消费次数
+    // 消费次数(用于做性能统计)
     private int consumerNums;
 
     /* 事件的处理掩码
@@ -29,12 +30,12 @@ public class Event {
     */
     private int consumerMask;
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int id) {
-        this.ID = id;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTopic() {

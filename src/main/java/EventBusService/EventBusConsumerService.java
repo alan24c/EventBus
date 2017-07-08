@@ -38,7 +38,7 @@ public class EventBusConsumerService implements ApplicationContextAware{
     @Autowired
     EventBusMetadata metadata;
 
-    private BlockingQueue<Event> dispatch = new LinkedBlockingDeque<>();
+    private BlockingQueue<Event> eventDispatching = new LinkedBlockingDeque<>();
 
     public void setApplicationContext(ApplicationContext context){
 
@@ -57,13 +57,16 @@ public class EventBusConsumerService implements ApplicationContextAware{
     }
 
     public void dispatchEvent(List<Event> events){
-        this.dispatch.addAll(events);
+        this.eventDispatching.addAll(events);
     }
 
+    /**
+     * 消费事件队列中的 Event
+     */
     public void comsumerEvent(){
 
         while (isDispatching){
-            Event event = dispatch.poll();
+            Event event = eventDispatching.poll();
             comsumerService.execute(new consumerTask(event));
         }
 
@@ -83,12 +86,18 @@ public class EventBusConsumerService implements ApplicationContextAware{
             String context = event.getContext();
             int consumerMask = event.getConsumerMask();
 
-            // 获取需要执行的 processor 的位置信息
-            List<Integer> locations = calculateLocation(topicNums,consumerMask);
 
-
+            /**
+             *  获取事件订阅者
+             */
             List<EventSubscribe> subscribes = metadata.getAllSubscribes(topic);
             if(subscribes == null) return;
+
+
+            /**
+             *  通过当前事件的mask获取待执行的订阅者的 index
+             */
+            List<Integer> locations = calculateLocation(topicNums,consumerMask);
 
 
             for(Integer index: locations){
@@ -96,6 +105,13 @@ public class EventBusConsumerService implements ApplicationContextAware{
                 String consumerBean = subscribe.getConsumerBeanName();
 
                 EventBusProcessor bean = (EventBusProcessor)applicationContext.getBean(consumerBean);
+                if(null == bean){
+                    // TODO: 17-7-8 记录日志信息
+                }
+
+                /**
+                 * 获取事件携带的参数信息
+                 */
                 Object obj = FastJsonUtils.stringToObject(context);
 
                 EventBusProcessResult res = bean.process(obj);
@@ -104,6 +120,19 @@ public class EventBusConsumerService implements ApplicationContextAware{
                     event.setConsumerMask(maskProcessSuccess(consumerMask,index));
                 }
 
+                /**
+                 * 设置处理次数
+                 */
+                int nums = event.getConsumerNums();
+                event.setConsumerNums(++nums);
+
+            }
+
+            /**
+             *  全部处理成功,设置状态标位
+             */
+            if(event.getConsumerMask() == 0){
+                event.setSuccess(Boolean.TRUE);
             }
 
             // DB 入库

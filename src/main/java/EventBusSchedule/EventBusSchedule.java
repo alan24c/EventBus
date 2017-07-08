@@ -1,11 +1,8 @@
-package eventBusSchedule;
+package EventBusSchedule;
 
 
-import EventBusDAO.EventBusRead;
-import EventBusMTO.EventReadMTO;
 import EventBusModel.Event;
 import EventBusService.*;
-import Metadata.EventBusMetadata;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;

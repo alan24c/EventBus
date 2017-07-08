@@ -7,7 +7,10 @@
 <mapper namespace="EventBusDAO.EventBusRead">
 
    
-    
+    <!--
+        Event DB模型 到 内存数据模型的映射
+        并不将DB中的字段完全映射到内存中来
+    -->
     <resultMap type="Event" id="event">
         <result property="topic" column="topic"/>
         <result property="context" column="context"/>
@@ -18,8 +21,8 @@
 
     <select id = "getEvent" parameterType="EventReadMTO" resultType="event">
 
-        SELECT * FROM EVENT
-        WHERE TOPIC = #{topicName}
+        SELECT * FROM event
+        WHERE topic = #{topicName}
 
     </select>
 
